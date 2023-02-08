@@ -4,13 +4,17 @@ let playerScore = 0;
 let computerScore = 0;
 
 function getComputerChoice () {
-    let number = Math.floor(Math.random()* 3) + 1;
-    if (number == 1) {
-        return "rock";
-    } else if (number == 2) {
-        return "paper";
-    } else {
-        return "scissors";
+    const randNum = Math.floor(Math.random() * 3) + 1;
+    switch (randNum) {
+        case 1:
+            return "rock";
+            break;
+        case 2:
+            return "paper";
+            break;
+        case 3:
+            return "scissors";
+            break;
     }
 }
 
