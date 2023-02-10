@@ -3,6 +3,30 @@ let computerSelection;
 let playerScore = 0;
 let computerScore = 0;
 
+
+// Create button event listeners that call playRound() w/ correct playerSelection
+const rockBtn = document.querySelector('#ROCK');
+console.log(rockBtn);
+rockBtn.addEventListener('click', () => {
+    computerSelection = getComputerChoice();
+    console.log(playRound('rock', computerSelection));
+});
+
+const paperBtn = document.querySelector('#PAPER');
+console.log(paperBtn);
+paperBtn.addEventListener('click', () => {
+    computerSelection = getComputerChoice();
+    console.log(playRound('paper', computerSelection));
+});
+
+const scissorsBtn = document.querySelector('#SCISSORS');
+console.log(scissorsBtn);
+scissorsBtn.addEventListener('click', () => {
+    computerSelection = getComputerChoice();
+    console.log(playRound('scissors', computerSelection));
+});
+
+
 function getComputerChoice () {
     const randNum = Math.floor(Math.random() * 3) + 1;
     switch (randNum) {
@@ -42,15 +66,15 @@ function playRound (playerSelection, computerSelection) {
     }
 }
 
-function game() {
-    for (let i = 0; i < 5; i++) {
-        playerSelection = prompt("rock, paper, or scissors?").toLowerCase();
-        computerSelection = getComputerChoice();
-        console.log(playRound(playerSelection, computerSelection));
-        console.log("Your Score:" + " " + playerScore);
-        console.log("Computer Score:" + " " + computerScore);
-    }
-}
+// function game() {
+//     for (let i = 0; i < 5; i++) {
+//         playerSelection = prompt("rock, paper, or scissors?").toLowerCase();
+//         computerSelection = getComputerChoice();
+//         console.log(playRound(playerSelection, computerSelection));
+//         console.log("Your Score:" + " " + playerScore);
+//         console.log("Computer Score:" + " " + computerScore);
+//     }
+// }
 
 function result(playerScore, computerScore) {
     if (playerScore > computerScore) {
@@ -62,5 +86,7 @@ function result(playerScore, computerScore) {
     }
 }
 
-console.log(game(), result());
+// console.log(game(), result());
+
+
 //paper beats rock, rock beats scissors, scissors beats paper
