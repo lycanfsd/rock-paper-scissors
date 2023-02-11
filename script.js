@@ -5,6 +5,7 @@ const selections = document.querySelectorAll(".choiceButton");
 let playerSelection;
 let computerSelection;
 let result;
+let finalScore;
 
 let playerScore = 0;
 let computerScore = 0;
@@ -65,11 +66,14 @@ function isWinner(playerScore, computerScore) {
    if (playerScore == 5 || computerScore == 5) {
         endGame();
         if (playerScore > computerScore) {
-            return "YOU WIN!"
+            result = "YOU WIN! <button onclick='startGame()'>Play Again!</button>";
+            resultDisplay.innerHTML = result;
         } else if (playerScore < computerScore) {
-            return "YOU LOSE!"
+            result = "YOU LOSE! <button onclick='startGame()'>Play Again!</button>";
+            resultDisplay.innerHTML = result;
         } else {
-            return "IT'S A TIE!"
+            result = "IT'S A TIE! <button onclick='startGame()'>Play Again!</button>";
+            resultDisplay.innerHTML = result;
         }
    }
 }
@@ -78,6 +82,13 @@ function endGame() {
     playerScore = 0;
     computerScore = 0;
     selections.forEach(selections => selections.disabled = true);
+}
+
+function startGame() {
+    resultDisplay.innerHTML = '';
+    playerSelectionDisplay.innerHTML = '';
+    computerSelectionDisplay.innerHTML = '';
+    selections.forEach(selections => selections.disabled = false);
 }
 
 
