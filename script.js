@@ -2,6 +2,12 @@ const playerSelectionDisplay = document.querySelector('.playerSelection');
 const computerSelectionDisplay = document.querySelector('.computerSelection');
 const resultDisplay = document.querySelector('.result');
 const selections = document.querySelectorAll(".choiceButton");
+const playAgain = document.createElement('BUTTON');
+const statContainer = document.querySelector('.stat-container');
+playAgain.classList.add('restart-button');
+playAgain.textContent = "PLAY AGAIN!";
+playAgain.addEventListener('click', startGame);
+
 let playerSelection;
 let computerSelection;
 let result;
@@ -66,15 +72,16 @@ function isWinner(playerScore, computerScore) {
    if (playerScore == 5 || computerScore == 5) {
         endGame();
         if (playerScore > computerScore) {
-            result = "YOU WIN! <button onclick='startGame()'>Play Again!</button>";
+            result = "YOU WIN!";
             resultDisplay.innerHTML = result;
         } else if (playerScore < computerScore) {
-            result = "YOU LOSE! <button onclick='startGame()'>Play Again!</button>";
+            result = "YOU LOSE!";
             resultDisplay.innerHTML = result;
         } else {
-            result = "IT'S A TIE! <button onclick='startGame()'>Play Again!</button>";
+            result = "IT'S A TIE!";
             resultDisplay.innerHTML = result;
         }
+        statContainer.appendChild(playAgain);
    }
 }
 
@@ -89,6 +96,7 @@ function startGame() {
     playerSelectionDisplay.innerHTML = '';
     computerSelectionDisplay.innerHTML = '';
     selections.forEach(selections => selections.disabled = false);
+    statContainer.removeChild(playAgain);
 }
 
 
