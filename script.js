@@ -8,7 +8,6 @@ let result;
 
 let playerScore = 0;
 let computerScore = 0;
-let turnCounter = 0;
 
 // Create button event listeners that call playRound() w/ correct playerSelection
 selections.forEach(selections => selections.addEventListener('click', (e) => {
@@ -17,13 +16,11 @@ selections.forEach(selections => selections.addEventListener('click', (e) => {
     console.log(playerSelection);
     computerSelection = getComputerChoice();
     computerSelectionDisplay.innerHTML = computerSelection;
-    result = playRound(playerSelection.toLowerCase(), computerSelection.toLowerCase());
+    playRound(playerSelection.toLowerCase(), computerSelection.toLowerCase());
+    result = `${playerScore} vs ${computerScore}`
     resultDisplay.innerHTML = result;
+    console.log(playerScore, computerScore, isWinner(playerScore, computerScore));
 }));
-
-
-
-
 
 function getComputerChoice () {
     const randNum = Math.floor(Math.random() * 3) + 1;
@@ -64,20 +61,25 @@ function playRound (playerSelection, computerSelection) {
     }
 }
 
-function isRoundFive (turnCounter) {
-    if (turnCounter == 5) {
-        console.log(isWinner());
-    }
-} 
-
 function isWinner(playerScore, computerScore) {
-    if (playerScore > computerScore) {
-        return "You have won!";
-    } else if (playerScore < computerScore) {
-        return "The Computer has won!";
-    } else {
-        return "It's a tie! Better luck next time!";
-    }
+   if (playerScore == 5 || computerScore == 5) {
+        endGame();
+        if (playerScore > computerScore) {
+            return "YOU WIN!"
+        } else if (playerScore < computerScore) {
+            return "YOU LOSE!"
+        } else {
+            return "IT'S A TIE!"
+        }
+   }
 }
+
+function endGame() {
+    playerScore = 0;
+    computerScore = 0;
+    selections.forEach(selections => selections.disabled = true);
+}
+
+
 
 //paper beats rock, rock beats scissors, scissors beats paper
