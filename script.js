@@ -99,6 +99,4 @@ function startGame() {
     statContainer.removeChild(playAgain);
 }
 
-
-
 //paper beats rock, rock beats scissors, scissors beats paper
