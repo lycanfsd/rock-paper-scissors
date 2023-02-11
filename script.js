@@ -16,6 +16,10 @@ let finalScore;
 let playerScore = 0;
 let computerScore = 0;
 
+//audio
+const winnerAudio = document.querySelector('#winnerAudio');
+const choiceAudio = document.querySelector('#choiceAudio');
+
 // Create button event listeners that call playRound() w/ correct playerSelection
 selections.forEach(selections => selections.addEventListener('click', (e) => {
     playerSelection = e.target.id;
@@ -27,6 +31,13 @@ selections.forEach(selections => selections.addEventListener('click', (e) => {
     result = `${playerScore} vs ${computerScore}`
     resultDisplay.innerHTML = result;
     console.log(playerScore, computerScore, isWinner(playerScore, computerScore));
+    if (choiceAudio.currentTime != 0) {
+        choiceAudio.pause();
+        choiceAudio.currentTime = 0;
+        playChoiceSound(choiceAudio);
+    } else {
+        playChoiceSound(choiceAudio);
+    }
 }));
 
 function getComputerChoice () {
@@ -73,6 +84,7 @@ function isWinner(playerScore, computerScore) {
         endGame();
         if (playerScore > computerScore) {
             result = "YOU WIN!";
+            winnerAudio.play();
             resultDisplay.innerHTML = result;
         } else if (playerScore < computerScore) {
             result = "YOU LOSE!";
@@ -92,6 +104,8 @@ function endGame() {
 }
 
 function startGame() {
+    winnerAudio.pause();
+    winnerAudio.currentTime = 0;
     resultDisplay.innerHTML = '';
     playerSelectionDisplay.innerHTML = '';
     computerSelectionDisplay.innerHTML = '';
@@ -99,4 +113,11 @@ function startGame() {
     statContainer.removeChild(playAgain);
 }
 
+function playChoiceSound(choiceAudio) {
+    choiceAudio.play();
+    if (choiceAudio.currentTime > 0.001) {
+        choiceAudio.pause();
+        choiceAudio.currentTime = 0;
+    }
+}
 //paper beats rock, rock beats scissors, scissors beats paper
